@@ -1,0 +1,2 @@
+.quote-box{padding:16px;background:var(--mint);border-radius:8px;margin:16px 0;line-height:1.8}.compare-button{width:100%;margin-top:8px}.shop-nav{flex-wrap:wrap}.shop-header{flex-wrap:wrap;gap:16px}.shop-header .brand{white-space:nowrap}.subtabs{max-width:100%;overflow-x:auto}.subtabs>button{flex-shrink:0}
+@media(max-width:700px){.shop-header{justify-content:center}.shop-nav{justify-content:center;width:100%}.shop-nav .btn{padding:8px;font-size:10px}.shop-nav>a{display:inline-flex}.shop-nav{gap:8px}}

@@ -1,0 +1,17 @@
+{
+  "name": "altab-tech-store",
+  "private": true,
+  "scripts": {
+    "check": "node --check static/app.js && node --check static/commerce.js && node --check static/operations.js && node --check static/selling.js && node --check static/inventory.js && node --check static/hardware.js && node --check static/sw.js && node --check static/theme-init.js && node --check static/accounting.js && node --check static/customers.js",
+    "test:browser": "node scripts/browser-smoke.cjs",
+    "test:commerce": "node scripts/commerce-smoke.cjs",
+    "test:operations": "node scripts/operations-smoke.cjs",
+    "test:selling": "node scripts/selling-smoke.cjs",
+    "test:inventory": "node scripts/inventory-smoke.cjs",
+    "test:accounting": "node scripts/accounting-smoke.cjs",
+    "test:customers": "node scripts/customers-smoke.cjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.58.0"
+  }
+}

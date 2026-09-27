@@ -1,0 +1,24 @@
+const {chromium}=require('playwright-core');
+const fs=require('node:fs');
+(async()=>{
+  const browser=await chromium.launch({headless:true});
+  const page=await browser.newPage({viewport:{width:1440,height:1000}});
+  await page.goto('http://127.0.0.1:8000/');
+  await page.locator('[name="username"]').fill('owner');
+  await page.locator('[name="password"]').fill(process.env.DEMO_PASSWORD||'AltabDemo!2026');
+  await page.getByRole('button',{name:'Sign in to workspace'}).click();
+  await page.getByRole('heading',{name:'Your store, at a glance.'}).waitFor();
+  fs.mkdirSync('test-results',{recursive:true});
+  if(!(await page.locator('.stat-value').first().textContent()).startsWith('৳'))throw Error('Currency must render as BDT');
+  await page.screenshot({path:'test-results/dashboard-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  await page.waitForFunction(() => document.querySelector('.sidebar').getBoundingClientRect().right <= 0);
+  await page.screenshot({path:'test-results/dashboard-mobile.png',fullPage:true,animations:'disabled'});
+  await page.goto('http://127.0.0.1:8000/shop/');
+  await page.locator('.product-card').first().waitFor();
+  await page.screenshot({path:'test-results/storefront-mobile.png',fullPage:true});
+  await page.setViewportSize({width:1440,height:1000});
+  await page.screenshot({path:'test-results/storefront-desktop.png',fullPage:true});
+  await browser.close();
+  console.log('Preview screenshots saved; UTF-8 currency verified.');
+})().catch(error=>{console.error(error);process.exit(1);});
